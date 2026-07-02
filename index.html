@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en" x-data="app()" :class="{'dark':dark}" class="scroll-smooth">
+
+<head>
+  <title>Klarence Cate Virtucio | IT Portfolio</title>
+
+<meta name="description"
+content="Portfolio of Klarence Cate Virtucio - BS Information Technology graduate specializing in Web Development, Unity Game Development, and IT Support.">
+
+<meta name="keywords"
+content="Klarence Cate Virtucio, IT Portfolio, Web Developer, Unity Developer, IT Support">
+
+<meta name="author"
+content="Klarence Cate Virtucio">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+    rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { display: ['PT Sans', 'sans-serif'], body: ['DM Sans', 'sans-serif'] },
+          colors: { accent: '#FF6B2B', 'accent-light': '#FF8F5C' }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      font-family: 'DM Sans', sans-serif
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'PT Sans', sans-serif
+    }
+
+    body {
+      transition: background-color .3s, color .3s
+    }
+
+    /* noise overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: .35;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E")
+    }
+
+    /* scrollbar */
+    ::-webkit-scrollbar {
+      width: 5px
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #FF6B2B;
+      border-radius: 99px
+    }
+
+    /* reveal on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .6s cubic-bezier(.4, 0, .2, 1), transform .6s cubic-bezier(.4, 0, .2, 1)
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none
+    }
+
+    .d1 {
+      transition-delay: .08s
+    }
+
+    .d2 {
+      transition-delay: .16s
+    }
+
+    .d3 {
+      transition-delay: .24s
+    }
+
+    .d4 {
+      transition-delay: .32s
+    }
+
+    /* nav underline animation */
+    .nl {
+      position: relative
+    }
+
+    .nl::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: currentColor;
+      transition: width .22s cubic-bezier(.4, 0, .2, 1)
+    }
+
+    .nl:hover::after,
+    .nl.on::after {
+      width: 100%
+    }
+
+    .nl.on {
+      font-weight: 500
+    }
+
+    /* shimmer button */
+    .shimmer {
+      position: relative;
+      overflow: hidden
+    }
+
+    .shimmer::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: rgba(255, 255, 255, .18);
+      transform: skewX(-20deg);
+      transition: left .4s cubic-bezier(.4, 0, .2, 1)
+    }
+
+    .shimmer:hover::after {
+      left: 160%
+    }
+
+    /* photo frames */
+    .pf {
+      overflow: hidden;
+      background: #d4d4d8
+    }
+
+    .pf img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block
+    }
+
+    /* card hover */
+    .card-h {
+      transition: transform .28s cubic-bezier(.4, 0, .2, 1), border-color .18s
+    }
+
+    .card-h:hover {
+      transform: translateY(-4px)
+    }
+
+    /* skill tag */
+    .stag {
+      transition: border-color .18s
+    }
+
+    [x-cloak] {
+      display: none !important
+    }
+  </style>
+</head>
+
+<body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 antialiased">
+
+  <!-- ═══ NAV ═══ -->
+  <header class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
+    :class="sc?'bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md shadow-sm shadow-black/5':''">
+    <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between" aria-label="Main navigation">
+
+      <a href="#hero" class="font-display font-bold text-xl tracking-tight relative z-10">
+        <span class="text-zinc-900 dark:text-white">Klarence Cate</span><span class="text-accent"> Portfolio</span>
+      </a>
+
+      <ul class="hidden md:flex items-center gap-8 text-sm" role="list">
+
+  <li>
+    <a href="#services"
+      class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+      :class="s==='services'?'on !text-zinc-900 dark:!text-white':''">
+      Skills
+    </a>
+  </li>
+
+  <li>
+    <a href="#work"
+      class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+      :class="s==='work'?'on !text-zinc-900 dark:!text-white':''">
+      Projects
+    </a>
+  </li>
+
+  <li>
+    <a href="#experience"
+      class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+      :class="s==='experience'?'on !text-zinc-900 dark:!text-white':''">
+      Experience
+    </a>
+  </li>
+
+  <li>
+    <a href="#education"
+      class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+      :class="s==='education'?'on !text-zinc-900 dark:!text-white':''">
+      Education
+    </a>
+  </li>
+
+  <li>
+    <a href="#certifications"
+      class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+      :class="s==='certifications'?'on !text-zinc-900 dark:!text-white':''">
+      Certifications
+    </a>
+  </li>
+
+  <li>
+    <a href="#about"
+      class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+      :class="s==='about'?'on !text-zinc-900 dark:!text-white':''">
+      About
+    </a>
+  </li>
+
+  <li>
+    <a href="#contact"
+      class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+      :class="s==='contact'?'on !text-zinc-900 dark:!text-white':''">
+      Contact
+    </a>
+  </li>
+
+</ul>
+
+      <div class="flex items-center gap-3">
+        <!-- dark toggle -->
+        <button @click="dark=!dark"
+          class="w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+          :aria-label="dark?'Light mode':'Dark mode'">
+          <svg x-show="!dark" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+          </svg>
+          <svg x-show="dark" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+          </svg>
+        </button>
+        <!-- hamburger -->
+        <button @click="mm=!mm"
+          class="md:hidden w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800"
+          :aria-expanded="mm" aria-label="Toggle menu">
+          <svg x-show="!mm" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg x-show="mm" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- mobile menu -->
+    <div x-show="mm" x-cloak x-transition:enter="transition ease-out duration-200"
+      x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+      x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+      x-transition:leave-end="opacity-0 -translate-y-2"
+      class="md:hidden bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-900">
+      <ul class="flex flex-col px-6 py-5 gap-4 text-sm font-medium" role="list">
+        <li><a href="#services" @click="mm=false"
+            class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">Services</a></li>
+        <li><a href="#work" @click="mm=false"
+            class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">Work</a></li>
+        <li><a href="#about" @click="mm=false"
+            class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">About</a></li>
+        <li><a href="#contact" @click="mm=false"
+            class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══ HERO ═══ -->
+    <section id="hero" class="relative min-h-screen flex items-center pt-16 overflow-hidden">
+      <div class="absolute top-1/4 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl pointer-events-none"
+        aria-hidden="true"></div>
+      <div
+        class="absolute bottom-1/4 left-0 w-64 h-64 bg-zinc-200/50 dark:bg-zinc-900/40 rounded-full blur-3xl pointer-events-none"
+        aria-hidden="true"></div>
+
+      <div class="relative z-10 max-w-6xl mx-auto px-6 py-24 w-full">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+
+          <div>
+            <p class="reveal text-sm font-medium text-accent tracking-widest uppercase mb-4">Available for work</p>
+            <h1
+              class="reveal d1 font-display font-bold text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-zinc-900 dark:text-white mb-6">
+              Hi, I'm <span class="text-accent">Klarence Cate Virtucio</span>
+            </h1>
+            <p
+             <p class="reveal d2 text-lg md:text-xl text-zinc-500 dark:text-zinc-400 font-light leading-relaxed max-w-md mb-10">
+  Front-End Developer & IT Graduate focused on building responsive web applications, mobile systems, and data-driven dashboards. I design and develop user-centered solutions for academic, business, and real-world use cases using modern web and software technologies.
+</p>
+            </p>
+            <div class="reveal d3 flex flex-wrap gap-4">
+              <a href="#work"
+                class="shimmer inline-flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium px-7 py-3.5 rounded-full hover:bg-zinc-700 dark:hover:bg-zinc-200 transition-colors text-sm">
+                View my work
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </a>
+              <a href="c:\Users\Klarence\Downloads\klarence website\folio-tailwind-1.0.0\Klarence Cate Virtucio - Resume.pdf" target="_blank"
+                class="inline-flex items-center gap-2 bg-accent text-white font-medium px-6 py-3 rounded-full hover:opacity-90 transition-all duration-300">
+
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16" />
+                </svg>
+                Download Resume
+              </a>
+            </div>
+            <div class="reveal d4 flex gap-8 mt-14 pt-8 border-t border-zinc-100 dark:border-zinc-900">
+            </div>
+          </div>
+
+          <div class="reveal d2 flex justify-center md:justify-end">
+            <div class="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
+              <div class="pf w-full h-full rounded-3xl">
+                <img src="c:\Users\Klarence\Downloads\klarence website\folio-tailwind-1.0.0\klarence id picture.jpg" alt="Klarence Cate — Front-End Developer"
+                  loading="eager">
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SERVICES ═══ -->
+    <section id="services" class="py-24 bg-zinc-50 dark:bg-zinc-900/40">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="mb-14">
+      <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">What I do</p>
+      <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">
+        Technical Skills
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <!-- WEB DEVELOPMENT -->
+      <article
+        class="reveal d1 card-h group bg-white dark:bg-zinc-900 rounded-2xl p-8 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+
+        <div class="w-12 h-12 flex items-center justify-center bg-orange-50 dark:bg-zinc-800 rounded-xl mb-6 group-hover:bg-accent/10 transition-colors">
+          <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2h-2" />
+          </svg>
+        </div>
+
+        <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-3">
+          Web Development
+        </h3>
+
+        <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+          Create responsive and interactive websites using modern front-end technologies while ensuring accessibility,
+          usability, and performance.
+        </p>
+
+        <!-- SKILL BADGES -->
+        <div class="flex flex-wrap gap-2 mt-4">
+          <span class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">HTML5</span>
+          <span class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">CSS3</span>
+          <span class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">JavaScript</span>
+          <span class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">Bootstrap</span>
+        </div>
+
+      </article>
+
+      <!-- SYSTEM DEVELOPMENT -->
+      <article
+        class="reveal d2 card-h group bg-zinc-900 dark:bg-zinc-800 rounded-2xl p-8 border border-zinc-800 hover:border-accent">
+
+        <div class="w-12 h-12 flex items-center justify-center bg-zinc-800 dark:bg-zinc-700 rounded-xl mb-6 group-hover:bg-accent/20 transition-colors">
+          <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+          </svg>
+        </div>
+
+        <h3 class="font-display font-bold text-xl text-white mb-3">
+          System Development
+        </h3>
+
+        <p class="text-sm text-zinc-400 leading-relaxed">
+          Develop software solutions for educational, healthcare, and business environments through analysis, design,
+          and implementation.
+        </p>
+
+        <div class="flex flex-wrap gap-2 mt-4">
+  <span class="text-xs bg-zinc-700 text-zinc-200 px-3 py-1 rounded-full">Visual Studio</span>
+  <span class="text-xs bg-zinc-700 text-zinc-200 px-3 py-1 rounded-full">GitHub</span>
+  <span class="text-xs bg-zinc-700 text-zinc-200 px-3 py-1 rounded-full">Unity</span>
+  <span class="text-xs bg-zinc-700 text-zinc-200 px-3 py-1 rounded-full">SSMS</span>
+</div>
+
+      </article>
+
+      <!-- DATA ANALYTICS -->
+      <article
+        class="reveal d3 card-h group bg-white dark:bg-zinc-900 rounded-2xl p-8 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+
+        <div class="w-12 h-12 flex items-center justify-center bg-orange-50 dark:bg-zinc-800 rounded-xl mb-6 group-hover:bg-accent/10 transition-colors">
+          <svg class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+          </svg>
+        </div>
+
+        <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white mb-3">
+          Data Analytics
+        </h3>
+
+        <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+          Transform business data into actionable insights through dashboard development, data visualization, and reporting using Power BI.
+        </p>
+
+        <!-- SKILL BADGES -->
+        <div class="flex flex-wrap gap-2 mt-4">
+          <span class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">Power BI</span>
+          <span class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">MySQL</span>
+          <span class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">SQL Server</span>
+        </div>
+
+      </article>
+
+    </div>
+  </div>
+
+
+<!-- SOFT SKILLS (ENLARGED VERSION) -->
+<div class="max-w-6xl mx-auto px-6 mt-14">
+
+  <div class="bg-white dark:bg-zinc-900 rounded-2xl p-10 border border-zinc-100 dark:border-zinc-800 hover:border-accent transition-all">
+
+    <h2 class="font-display font-bold text-3xl md:text-4xl text-zinc-900 dark:text-white mb-3">
+      Soft Skills
+    </h2>
+
+    <p class="text-base text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6 max-w-2xl">
+      Personal and interpersonal strengths that support teamwork, adaptability, and productivity in development environments.
+    </p>
+
+    <div class="flex flex-wrap gap-3">
+
+      <span class="text-sm bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 px-4 py-2 rounded-full">
+        Adaptable
+      </span>
+
+      <span class="text-sm bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 px-4 py-2 rounded-full">
+        Creative
+      </span>
+
+      <span class="text-sm bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 px-4 py-2 rounded-full">
+        Teamwork
+      </span>
+
+      <span class="text-sm bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 px-4 py-2 rounded-full">
+        Time Management
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ WORK ═══ -->
+    <section id="work" class="py-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14">
+          <div>
+            <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">Portfolio</p>
+            <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">Academic
+              Projects</h2>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+
+          <article
+class="card-h reveal d1 group md:col-span-2 rounded-3xl overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-accent transition-all">
+
+<div class="grid lg:grid-cols-2">
+
+    <!-- IMAGE -->
+
+    <div class="pf h-80 lg:h-full overflow-hidden">
+
+        <img
+        src="c:\Users\Klarence\Downloads\klarence website\folio-tailwind-1.0.0\nextplore.jpg"
+        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+
+    </div>
+
+    <!-- CONTENT -->
+
+    <div class="p-8 flex flex-col justify-center">
+
+        <span class="text-accent text-sm font-semibold uppercase tracking-widest mb-3">
+            Featured Capstone Project
+        </span>
+
+        <h3 class="font-display text-4xl font-bold mb-3">
+            Nextplore
+        </h3>
+
+        <p class="text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
+
+            A Unity-based 3D mobile application that helps incoming
+            freshmen explore college programs through immersive
+            virtual environments, assessments, and gamified learning.
+
+        </p>
+
+        <div class="flex flex-wrap gap-2 mb-6">
+
+            <span class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent px-3 py-1 rounded-full">
+                Unity
+            </span>
+
+            <span class="text-xs bg-zinc-200 dark:bg-zinc-800 px-3 py-1 rounded-full">
+                C#
+            </span>
+
+            <span class="text-xs bg-zinc-200 dark:bg-zinc-800 px-3 py-1 rounded-full">
+                Figma
+            </span>
+
+            <span class="text-xs bg-zinc-200 dark:bg-zinc-800 px-3 py-1 rounded-full">
+                GitHub
+            </span>
+
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 text-sm">
+
+            <div>✓ Unity Development</div>
+
+            <div>✓ UI Design</div>
+
+            <div>✓ Gameplay Programming</div>
+
+            <div>✓ Testing & Debugging</div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</article>
+
+</article>
+
+          <article
+class="card-h reveal d2 group rounded-3xl overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-accent transition-all">
+
+    <div class="relative overflow-hidden">
+
+        <img
+        src="c:\Users\Klarence\Downloads\klarence website\folio-tailwind-1.0.0\pillpal.png"
+        alt="PillPal"
+        class="w-full h-60 object-cover group-hover:scale-105 transition duration-500">
+
+    </div>
+
+    <div class="p-7">
+
+        <div class="flex flex-wrap gap-2 mb-5">
+
+            <span class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-3 py-1 rounded-full">
+                Android Studio
+            </span>
+
+            <span class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">
+                Java
+            </span>
+
+            <span class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">
+                Canva
+            </span>
+
+        </div>
+
+        <h3 class="font-display text-3xl font-bold text-zinc-900 dark:text-white mb-2">
+            PillPal
+        </h3>
+
+        <p class="text-accent font-medium mb-5">
+            Mobile Healthcare Application
+        </p>
+
+        <p class="text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
+            PillPal is a medication reminder application that helps users manage prescriptions through scheduled reminders, medication tracking, and an intuitive mobile interface to improve adherence.
+        </p>
+
+
+        <div class="grid grid-cols-2 gap-2 text-sm mb-6">
+
+            <div>✓ UI Design</div>
+            <div>✓ Android Development</div>
+            <div>✓ Database Integration</div>
+            <div>✓ Testing & Debugging</div>
+
+        </div>
+
+      
+
+    </div>
+
+</article>
+
+<article
+class="card-h reveal d3 group rounded-3xl overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-accent transition-all">
+
+    <div class="relative overflow-hidden">
+
+        <img
+        src="c:\Users\Klarence\Downloads\klarence website\folio-tailwind-1.0.0\beertud.png"
+        alt="Beertud POS"
+        class="w-full h-60 object-cover group-hover:scale-105 transition duration-500">
+
+    </div>
+
+    <div class="p-7">
+
+        <div class="flex flex-wrap gap-2 mb-5">
+
+            <span class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-3 py-1 rounded-full">
+                Visual Studio
+            </span>
+
+            <span class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">
+                C#
+            </span>
+
+            <span class="text-xs bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full">
+                SQL Server
+            </span>
+
+        </div>
+
+        <h3 class="font-display text-3xl font-bold text-zinc-900 dark:text-white mb-2">
+            Beertud
+        </h3>
+
+        <p class="text-accent font-medium mb-5">
+            Point-of-Sale System
+        </p>
+
+        <p class="text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
+            A desktop-based Point-of-Sale system that streamlines sales transactions, inventory management, and reporting for small businesses using C# and SQL Server.
+        </p>
+
+      
+        <div class="grid grid-cols-2 gap-2 text-sm mb-6">
+
+            <div>✓ UI Design</div>
+            <div>✓ Desktop Development</div>
+            <div>✓ Database Design</div>
+            <div>✓ System Testing</div>
+
+        </div>
+
+        
+
+    </div>
+
+</article>
+
+
+</section>
+<!-- ═══ EXPERIENCE ═══ -->
+<section id="experience" class="py-24 bg-zinc-50 dark:bg-zinc-900/40">
+
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="mb-16">
+      <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">
+        Career Journey
+      </p>
+
+      <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">
+        Experience
+      </h2>
+    </div>
+
+    <div class="relative border-l border-zinc-300 dark:border-zinc-700 ml-3">
+
+      <!-- EXPERIENCE 1 -->
+<div class="relative pl-10 pb-14 reveal d1">
+
+  <span class="absolute -left-[11px] top-1 w-5 h-5 rounded-full bg-accent border-4 border-white dark:border-zinc-900"></span>
+
+  <div class="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 p-7 hover:border-accent transition-all">
+
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+
+      <div>
+        <h3 class="font-display text-2xl font-bold text-zinc-900 dark:text-white">
+          IT / Data Analytics Intern
+        </h3>
+
+        <p class="text-accent font-medium">
+          CANB Inc.
+        </p>
+      </div>
+
+      <span class="text-sm bg-zinc-200 dark:bg-zinc-800 px-4 py-2 rounded-full text-zinc-600 dark:text-zinc-400">
+        2026
+      </span>
+
+    </div>
+
+    <p class="text-zinc-500 dark:text-zinc-400 leading-relaxed mb-5">
+      Supported the Data Analytics team by designing relational databases,
+      developing SQL queries, cleaning and validating datasets, and creating
+      Power BI dashboards to provide accurate reports and business insights.
+      Assisted in business process analysis to improve reporting efficiency
+      and support data-driven decision-making.
+    </p>
+
+    <div class="flex flex-wrap gap-2">
+
+      <span class="text-xs bg-zinc-200 dark:bg-zinc-800 px-3 py-1 rounded-full">
+        SQL
+      </span>
+
+      <span class="text-xs bg-zinc-200 dark:bg-zinc-800 px-3 py-1 rounded-full">
+        Power BI
+      </span>
+
+      <span class="text-xs bg-zinc-200 dark:bg-zinc-800 px-3 py-1 rounded-full">
+        Database Design
+      </span>
+
+      <span class="text-xs bg-zinc-200 dark:bg-zinc-800 px-3 py-1 rounded-full">
+        Data Cleaning
+      </span>
+
+      <span class="text-xs bg-zinc-200 dark:bg-zinc-800 px-3 py-1 rounded-full">
+        Data Analytics
+      </span>
+
+      <span class="text-xs bg-zinc-200 dark:bg-zinc-800 px-3 py-1 rounded-full">
+        Business Intelligence
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+      <!-- EXPERIENCE 2 -->
+<div class="relative pl-10 pb-14 reveal d2">
+
+  <span class="absolute -left-[11px] top-1 w-5 h-5 rounded-full bg-accent border-4 border-white dark:border-zinc-900"></span>
+
+  <div class="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 p-7 hover:border-accent transition-all">
+
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+
+      <div>
+        <h3 class="font-display text-2xl font-bold text-zinc-900 dark:text-white">
+          Capstone Project Developer
+        </h3>
+
+        <p class="text-accent font-medium">
+          Nextplore
+        </p>
+      </div>
+
+      <span class="text-sm bg-zinc-200 dark:bg-zinc-800 px-4 py-2 rounded-full">
+        2025 – 2026
+      </span>
+
+    </div>
+
+    <p class="text-zinc-500 dark:text-zinc-400 leading-relaxed mb-5">
+      Collaborated with a development team to build Nextplore, a Unity-based
+      3D mobile application that helps incoming college students explore
+      academic programs through immersive virtual environments,
+      interactive assessments, and gamified learning experiences.
+      Contributed to Unity development, gameplay implementation,
+      UI design, testing, debugging, and project documentation.
+    </p>
+
+    <div class="flex flex-wrap gap-2">
+
+      <span class="text-xs bg-zinc-200 dark:bg-zinc-800 px-3 py-1 rounded-full">
+        Unity
+      </span>
+
+      <span class="text-xs bg-zinc-200 dark:bg-zinc-800 px-3 py-1 rounded-full">
+        C#
+      </span>
+
+      <span class="text-xs bg-zinc-200 dark:bg-zinc-800 px-3 py-1 rounded-full">
+        Mobile Development
+      </span>
+
+      <span class="text-xs bg-zinc-200 dark:bg-zinc-800 px-3 py-1 rounded-full">
+        UI / UX
+      </span>
+
+      <span class="text-xs bg-zinc-200 dark:bg-zinc-800 px-3 py-1 rounded-full">
+        Testing
+      </span>
+
+      <span class="text-xs bg-zinc-200 dark:bg-zinc-800 px-3 py-1 rounded-full">
+        Team Collaboration
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+      <!-- EXPERIENCE 3 -->
+      <div class="relative pl-10 reveal d3">
+
+        <span class="absolute -left-[11px] top-1 w-5 h-5 rounded-full bg-accent border-4 border-white dark:border-zinc-900"></span>
+
+        <div class="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 p-7 hover:border-accent transition-all">
+
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+
+            <div>
+              <h3 class="font-display text-2xl font-bold text-zinc-900 dark:text-white">
+                Open to Opportunities
+              </h3>
+
+              <p class="text-accent font-medium">
+                Full-Time Position
+              </p>
+            </div>
+
+            <span class="text-sm bg-accent text-white px-4 py-2 rounded-full">
+                Available
+            </span>
+
+          </div>
+
+          <p class="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+  Actively seeking opportunities in Front-End Development, Data Analytics,
+  Software Development, and Android Development. I am eager to
+  contribute my skills in SQL, Power BI, database management, mobile
+  application development, and software development while continuously
+  learning and delivering high-quality solutions.
+</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+<!-- ═══ EDUCATION ═══ -->
+<section id="education" class="py-24">
+
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="mb-16">
+      <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">
+        Academic Background
+      </p>
+
+      <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">
+        Education
+      </h2>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-8">
+
+      <!-- COLLEGE -->
+      <article
+        class="reveal d1 bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 p-8 hover:border-accent transition-all">
+
+        <div class="flex items-center justify-between mb-6">
+          <span
+            class="w-14 h-14 rounded-2xl bg-orange-100 dark:bg-zinc-800 flex items-center justify-center text-2xl">
+            🎓
+          </span>
+
+          <span
+            class="text-sm px-4 py-2 rounded-full bg-accent text-white font-medium">
+            2022 – 2026
+          </span>
+        </div>
+
+        <h3 class="font-display text-2xl font-bold text-zinc-900 dark:text-white mb-2">
+          Bachelor of Science in Information Technology
+        </h3>
+
+        <p class="text-accent font-medium mb-5">
+          STI College Lipa
+        </p>
+
+        <p class="text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
+          Completed coursework in software development, database management,
+          web and mobile application development, systems analysis, networking,
+          and data analytics. Participated in academic projects focused on
+          real-world business and technology solutions.
+        </p>
+
+        <div class="flex flex-wrap gap-2">
+
+          <span class="text-xs bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded-full">
+            Software Development
+          </span>
+
+          <span class="text-xs bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded-full">
+            Database Systems
+          </span>
+
+          <span class="text-xs bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded-full">
+            Web Development
+          </span>
+
+          <span class="text-xs bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded-full">
+            Data Analytics
+          </span>
+
+        </div>
+
+      </article>
+
+      <!-- SENIOR HIGH -->
+      <article
+        class="reveal d2 bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 p-8 hover:border-accent transition-all">
+
+        <div class="flex items-center justify-between mb-6">
+          <span
+            class="w-14 h-14 rounded-2xl bg-orange-100 dark:bg-zinc-800 flex items-center justify-center text-2xl">
+            💻
+          </span>
+
+          <span
+            class="text-sm px-4 py-2 rounded-full bg-zinc-200 dark:bg-zinc-800">
+            2020 – 2022
+          </span>
+        </div>
+
+        <h3 class="font-display text-2xl font-bold text-zinc-900 dark:text-white mb-2">
+          TVL – Information and Communication Technology
+        </h3>
+
+        <p class="text-accent font-medium mb-5">
+          San Antonio National High School
+        </p>
+
+        <p class="text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
+          Specialized in Computer System Servicing (CSS), gaining hands-on
+          experience in computer hardware assembly, operating system and
+          software installation, network setup and configuration, preventive
+          maintenance, and troubleshooting. Successfully completed the training
+          requirements aligned with TESDA Computer Systems Servicing NC II.
+        </p>
+
+        <div class="flex flex-wrap gap-2">
+
+          <span class="text-xs bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded-full">
+            Computer Hardware
+          </span>
+
+          <span class="text-xs bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded-full">
+            Network Configuration
+          </span>
+
+          <span class="text-xs bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded-full">
+            PC Troubleshooting
+          </span>
+
+          <span class="text-xs bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded-full">
+            System Maintenance
+          </span>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ═══ CERTIFICATIONS ═══ -->
+<section id="certifications" class="py-24 bg-zinc-50 dark:bg-zinc-900/40">
+
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="mb-16">
+      <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">
+        Professional Development
+      </p>
+
+      <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">
+        Certifications
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <!-- CERTIFICATION 1 -->
+      <article
+        class="reveal d1 bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 p-7 hover:border-accent transition-all">
+
+        <div
+          class="w-14 h-14 rounded-2xl bg-orange-100 dark:bg-zinc-800 flex items-center justify-center text-2xl mb-6">
+          🏢
+        </div>
+
+        <span
+          class="inline-block text-sm bg-accent text-white px-4 py-2 rounded-full mb-5">
+          2024
+        </span>
+
+        <h3 class="font-display text-xl font-bold text-zinc-900 dark:text-white mb-3">
+          Introduction to S/4HANA using Global Bike
+        </h3>
+
+        <p class="text-accent font-medium mb-4">
+          SAP University Alliances
+        </p>
+
+        <p class="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+          Completed foundational training in SAP S/4HANA, covering enterprise
+          resource planning (ERP) concepts, business processes, and system
+          navigation using the Global Bike simulation.
+        </p>
+
+      </article>
+
+      <!-- CERTIFICATION 2 -->
+      <article
+        class="reveal d2 bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 p-7 hover:border-accent transition-all">
+
+        <div
+          class="w-14 h-14 rounded-2xl bg-orange-100 dark:bg-zinc-800 flex items-center justify-center text-2xl mb-6">
+          📊
+        </div>
+
+        <span
+          class="inline-block text-sm bg-accent text-white px-4 py-2 rounded-full mb-5">
+          2024
+        </span>
+
+        <h3 class="font-display text-xl font-bold text-zinc-900 dark:text-white mb-3">
+          Data Science, Artificial Intelligence & Business Analytics
+        </h3>
+
+        <p class="text-accent font-medium mb-4">
+          DATABIZ Conference
+        </p>
+
+        <p class="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+          Participated in a technology conference focused on emerging trends in
+          data science, artificial intelligence, business analytics, and
+          data-driven decision-making.
+        </p>
+
+      </article>
+
+      <!-- CERTIFICATION 3 -->
+      <article
+        class="reveal d3 bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 p-7 hover:border-accent transition-all">
+
+        <div
+          class="w-14 h-14 rounded-2xl bg-orange-100 dark:bg-zinc-800 flex items-center justify-center text-2xl mb-6">
+          🛠️
+        </div>
+
+        <span
+          class="inline-block text-sm bg-accent text-white px-4 py-2 rounded-full mb-5">
+          2022
+        </span>
+
+        <h3 class="font-display text-xl font-bold text-zinc-900 dark:text-white mb-3">
+          Computer System Servicing NC II
+        </h3>
+
+        <p class="text-accent font-medium mb-4">
+          TESDA
+        </p>
+
+        <p class="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+          Certified in computer hardware servicing, operating system
+          installation, network configuration, preventive maintenance, and
+          troubleshooting following TESDA national competency standards.
+        </p>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about" class="py-24 bg-white dark:bg-zinc-950">
+
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="grid md:grid-cols-2 gap-14 items-center">
+
+      <!-- IMAGE (1x1 restored) -->
+      <div class="reveal order-2 md:order-1">
+        <div class="relative w-full max-w-sm mx-auto aspect-square rounded-3xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-lg">
+
+          <img
+            src="c:\Users\Klarence\Downloads\klarence website\folio-tailwind-1.0.0\klarence id picture.jpg"
+            alt="Klarence Cate Virtucio"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          >
+
+          <!-- subtle overlay -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
+
+        </div>
+      </div>
+
+      <!-- TEXT -->
+      <div class="order-1 md:order-2">
+
+        <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">
+          About Me
+        </p>
+
+        <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white leading-tight mb-8">
+          Building practical software<br>
+          through design, development & data.
+        </h2>
+
+        <p class="reveal d2 text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
+          I'm <span class="font-semibold text-zinc-900 dark:text-white">Klarence Cate O. Virtucio</span>,
+          a BS Information Technology graduate with experience in web development,
+          Android applications, Unity systems, and data analytics.
+        </p>
+
+        <p class="reveal d3 text-zinc-500 dark:text-zinc-400 leading-relaxed mb-10">
+          I build applications for educational, healthcare, and business use cases such as
+          interactive 3D learning systems, medication management apps, POS systems, and data dashboards.
+          I focus on clean UI, functional design, and practical solutions backed by data and usability.
+        </p>
+
+        <!-- QUICK TAGS -->
+        <div class="flex flex-wrap gap-2">
+
+          <span class="text-sm bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 px-3 py-1 rounded-full">
+            Front-End
+          </span>
+
+          <span class="text-sm bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 px-3 py-1 rounded-full">
+            Android Dev
+          </span>
+
+          <span class="text-sm bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 px-3 py-1 rounded-full">
+            Unity
+          </span>
+
+          <span class="text-sm bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 px-3 py-1 rounded-full">
+            Data Analytics
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- QUICK STATS -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
+
+      <div class="reveal text-center">
+        <h3 class="text-4xl font-display font-bold text-accent">3+</h3>
+        <p class="text-zinc-500 dark:text-zinc-400 mt-2">Academic Projects</p>
+      </div>
+
+      <div class="reveal text-center">
+        <h3 class="text-4xl font-display font-bold text-accent">1</h3>
+        <p class="text-zinc-500 dark:text-zinc-400 mt-2">Internship Experience</p>
+      </div>
+
+      <div class="reveal text-center">
+        <h3 class="text-4xl font-display font-bold text-accent">10+</h3>
+        <p class="text-zinc-500 dark:text-zinc-400 mt-2">Technologies Used</p>
+      </div>
+
+      <div class="reveal text-center">
+        <h3 class="text-4xl font-display font-bold text-accent">2026</h3>
+        <p class="text-zinc-500 dark:text-zinc-400 mt-2">BSIT Graduate</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+   
+    <!-- ═══ CONTACT ═══ -->
+    <section id="contact" class="py-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="bg-zinc-900 dark:bg-zinc-800 rounded-3xl p-10 md:p-16 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-64 h-64 bg-accent/20 rounded-full blur-3xl pointer-events-none"
+            aria-hidden="true"></div>
+          <div class="absolute bottom-0 left-0 w-40 h-40 bg-accent/10 rounded-full blur-2xl pointer-events-none"
+            aria-hidden="true"></div>
+
+          <div class="relative z-10 grid md:grid-cols-2 gap-12 items-start">
+
+            <div>
+              <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">Get in touch</p>
+              <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-white leading-tight mb-5">Let's
+                Build<br>Something Together</h2>
+              <p class="reveal d2 text-zinc-400 leading-relaxed mb-8">I am currently seeking opportunities in Front-End Development, Software Development, IT Support, and Data Analytics. I am actively looking for full-time roles where I can contribute my skills and grow within a professional team.</p>
+
+              <div class="reveal d3 flex flex-col gap-4">
+                <a class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
+                  <span
+                    class="w-9 h-9 flex items-center justify-center bg-zinc-800 rounded-lg group-hover:bg-accent/20 transition-colors shrink-0">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </span>
+                  <span class="text-sm">virtucioklarencecate@gmail.com</span>
+                </a>
+                <a href="https://www.linkedin.com/in/klarence-cate-virtucio-430b34409/" rel="noopener noreferrer"
+                  target="_blank"
+                  class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
+                  <span
+                    class="w-9 h-9 flex items-center justify-center bg-zinc-800 rounded-lg group-hover:bg-accent/20 transition-colors shrink-0">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path
+                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    </svg>
+                  </span>
+                  <span class="text-sm">linkedin.com/in/klarence-cate-virtucio</span>
+                </a>
+                <a href="https://github.com/klarence-virtucio" target="_blank" rel="noopener noreferrer"
+  class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
+
+  <span
+    class="w-9 h-9 flex items-center justify-center bg-zinc-800 rounded-lg group-hover:bg-accent/20 transition-colors shrink-0">
+
+    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577
+        0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756
+        -1.089-.745.083-.729.083-.729 1.205.085 1.84 1.236 1.84 1.236
+        1.07 1.835 2.807 1.305 3.492.997.108-.776.418-1.305.76-1.605
+        -2.665-.3-5.466-1.335-5.466-5.93 0-1.31.468-2.38 1.235-3.22
+        -.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23
+        .96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405
+        2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176
+        .765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92
+        .42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286
+        0 .315.21.69.825.57C20.565 21.795 24 17.31 24 12
+        24 5.37 18.63 0 12 0z" />
+    </svg>
+  </span>
+
+  <span class="text-sm">github.com/klarence-virtucio</span>
+</a>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      
+    </section>
+    
+
+  </main>
+
+
+  <script>
+    function app() {
+      return {
+        dark: false,
+        mm: false,
+        sc: false,
+        s: 'hero',
+
+        init() {
+          // dark mode
+          this.dark = localStorage.getItem('theme') === 'dark' ||
+            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          this.$watch('dark', v => localStorage.setItem('theme', v ? 'dark' : 'light'));
+
+          // scroll
+          window.addEventListener('scroll', () => {
+            this.sc = window.scrollY > 20;
+            this.updateSection();
+          }, { passive: true });
+
+          // reveal
+          const io = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+          }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+          document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+          // year
+          document.getElementById('yr').textContent = new Date().getFullYear();
+        },
+
+        updateSection() {
+          const atBottom = (window.innerHeight + window.scrollY) >= document.body.scrollHeight - 60;
+          if (atBottom) { this.s = 'contact'; return; }
+          const ids = ['contact', 'blog', 'reviews', 'about', 'work', 'services', 'hero'];
+          for (const id of ids) {
+            const el = document.getElementById(id);
+            if (el && window.scrollY >= el.offsetTop - 130) { this.s = id; return; }
+          }
+        }
+      }
+    }
+  </script>
+
+</body>
+
+</html>
